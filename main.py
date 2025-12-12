@@ -82,6 +82,7 @@ async def impostor(interaction: discord.Interaction, jugadores: str):
 keep_alive()
 
 # Ejecuta el bot
-bot.run(TOKEN)
+bot.run(os.getenv("TOKEN"))
 
 #aaaaaaaaaa
+
