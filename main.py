@@ -3,9 +3,6 @@ import discord
 import random
 from discord.ext import commands
 from discord import app_commands
-from keep_alive import keep_alive  # para que Replit mantenga el bot vivo
-
-TOKEN = os.environ["TOKEN"]  # token seguro desde Secrets
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
@@ -21,16 +18,12 @@ async def on_ready():
         print(f"Error sincronizando slash commands: {e}")
 
 
-# ================================
-# COMANDO /impostor
-# ================================
 @bot.tree.command(name="impostor", description="Inicia el juego del impostor con los jugadores mencionados.")
 async def impostor(interaction: discord.Interaction, jugadores: str):
 
     ids = jugadores.split()
     miembros = []
 
-    # Convierte las menciones en IDs → luego en miembros
     for item in ids:
         if item.startswith("<@") and item.endswith(">"):
             id_num = int(item.replace("<@", "").replace(">", "").replace("!", ""))
@@ -78,11 +71,4 @@ async def impostor(interaction: discord.Interaction, jugadores: str):
             )
 
 
-# Mantiene vivo el servidor web de Replit
-keep_alive()
-
-# Ejecuta el bot
 bot.run(os.getenv("TOKEN"))
-
-#aaaaaaaaaa
-
